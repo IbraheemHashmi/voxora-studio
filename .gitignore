@@ -1,0 +1,21 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# Virtual environments
+venv/
+env/
+.env
+
+# VOXORA local caches & storage
+audio_cache/
+previews_cache/
+history.json
+
+# OS specific files
+.DS_Store
+Thumbs.db
+*.swp
+*.log

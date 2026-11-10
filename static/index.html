@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VOXORA Studio | Next-Gen Neural Voice & Video Pacing Engine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css?v=2.2">
+</head>
+<body class="voxora-dark">
+
+  <!-- Ambient Dynamic Aurora Glow Background -->
+  <div class="ambient-glow-mesh">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb orb-3"></div>
+  </div>
+
+  <div class="app-wrapper">
+
+    <!-- Top Navigation Header -->
+    <header class="studio-nav">
+      <div class="nav-brand-group">
+        <div class="voxora-logo" id="logo-refresh">
+          <div class="logo-prism">
+            <span class="prism-facet f1"></span>
+            <span class="prism-facet f2"></span>
+            <span class="prism-facet f3"></span>
+          </div>
+          <div class="brand-naming">
+            <span class="brand-title">VOX<span class="brand-accent">ORA</span></span>
+            <span class="brand-tag">STUDIO PRO</span>
+          </div>
+        </div>
+
+        <nav class="nav-mode-pills">
+          <button class="nav-pill active" data-tab="studio">
+            <svg class="pill-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5v14M7 8v8M22 10v4M2 10v4"/></svg>
+            Studio Deck
+          </button>
+          <button class="nav-pill" data-tab="voices">
+            <svg class="pill-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Voice Matrix (<span id="voice-count-badge">322</span>)
+          </button>
+          <button class="nav-pill" data-tab="history">
+            <svg class="pill-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Vault (<span id="history-count-badge">0</span>)
+          </button>
+        </nav>
+      </div>
+
+      <div class="nav-meta-group">
+        <div class="engine-status-pill">
+          <span class="status-pulse-ring"></span>
+          <span class="engine-name">Andrew Natural 24kHz</span>
+        </div>
+        <div class="pro-badge-pill">
+          <span class="sparkle-icon">✦</span>
+          <span>Unlimited Access</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Workspace Container -->
+    <main class="studio-main">
+
+      <!-- ================================================================
+           TAB 1: STUDIO DECK (PRIMARY WORKSPACE)
+           ================================================================ -->
+      <section id="tab-studio" class="tab-view active">
+        <div class="deck-grid">
+
+          <!-- Main Creator Card -->
+          <div class="creator-card">
+
+            <!-- Quick-Switch Voice Strip (Fast 1-Click Access) -->
+            <div class="quick-voices-strip">
+              <span class="strip-label">Flagship Voices:</span>
+              <div class="quick-voice-cards" id="quick-voice-cards">
+                <!-- Populated dynamically: Andrew, Ava, Brian, Emma, Guy, Christopher -->
+              </div>
+              <button class="btn-all-voices" id="btn-open-matrix" title="Explore full catalog of 322 voices">
+                <span>Browse All (322)</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+            </div>
+
+            <!-- Active Voice Identity Card -->
+            <div class="active-voice-hero" id="active-voice-hero">
+              <div class="hero-voice-left">
+                <div class="voice-avatar-glow" id="current-avatar">AN</div>
+                <div class="hero-voice-text">
+                  <div class="hero-name-row">
+                    <h2 class="active-name" id="current-voice-name">Andrew Natural</h2>
+                    <span class="hero-flag" id="current-voice-flag">🇺🇸</span>
+                    <span class="hero-badge" id="current-voice-badge">Copilot Flagship</span>
+                  </div>
+                  <div class="hero-traits-row" id="current-voice-traits">
+                    <span class="trait-tag">Warm</span>
+                    <span class="trait-tag">Confident</span>
+                    <span class="trait-tag">Authentic</span>
+                    <span class="trait-tag locale-tag">English (US)</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="hero-voice-right">
+                <select id="quick-voice-select" class="quick-voice-select" title="Instant voice selector">
+                  <!-- Populated dynamically -->
+                </select>
+                <button class="btn-change-voice" id="btn-change-voice" title="Browse all 322 neural voices">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                  <span>Change Voice</span>
+                </button>
+                <button class="btn-audition" id="btn-quick-preview" title="Audition this voice sample instantly">
+                  <span class="audition-icon">▶</span>
+                  <span class="audition-label">Audition Voice</span>
+                  <div class="mini-eq" id="mini-wave">
+                    <span></span><span></span><span></span><span></span>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            <!-- ============================================================
+                 FACELESS VIDEO TIME-WARP & AUTO-PACER SUITE
+                 ============================================================ -->
+            <div class="autospace-deck">
+              <div class="autospace-header">
+                <div class="autospace-title-wrap">
+                  <div class="autospace-icon">🎯</div>
+                  <div>
+                    <h3 class="autospace-heading">Time-Warp Video Pacer</h3>
+                    <p class="autospace-sub">Fit script to exact video runtime with viral retention analysis</p>
+                  </div>
+                </div>
+
+                <div class="autospace-toggle-wrap">
+                  <span class="toggle-label">Auto-Lock Pace</span>
+                  <label class="vox-switch">
+                    <input type="checkbox" id="pacer-enabled" checked>
+                    <span class="vox-slider"></span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Video Length Target Chips -->
+              <div class="timeline-targets-row">
+                <span class="timeline-label">Video Target:</span>
+                <div class="targets-chips-list">
+                  <button class="target-chip" data-seconds="15">⚡ 15s Hook</button>
+                  <button class="target-chip" data-seconds="30">📱 30s Short</button>
+                  <button class="target-chip active" data-seconds="60">⏱️ 60s YouTube Short</button>
+                  <button class="target-chip" data-seconds="90">🎬 90s Reel</button>
+                  <button class="target-chip" data-seconds="180">📹 3 min</button>
+                  <button class="target-chip" data-seconds="300">🎞️ 5 min</button>
+                  <button class="target-chip" data-seconds="480">💰 8 min</button>
+                </div>
+
+                <div class="custom-target-box">
+                  <input type="number" id="custom-min" min="0" max="60" placeholder="0" class="time-input">
+                  <span class="time-unit">m</span>
+                  <input type="number" id="custom-sec" min="0" max="59" placeholder="45" class="time-input">
+                  <span class="time-unit">s</span>
+                  <button class="btn-set-custom" id="btn-apply-custom">Lock</button>
+                </div>
+              </div>
+
+              <!-- Retention Speedometer & Pacing Telemetry -->
+              <div class="telemetry-card">
+                <div class="telemetry-grid">
+                  <div class="tele-col">
+                    <span class="tele-title">SCRIPT WORDS</span>
+                    <span class="tele-value" id="metric-words">42</span>
+                  </div>
+                  <div class="tele-col">
+                    <span class="tele-title">VIDEO TARGET</span>
+                    <span class="tele-value" id="metric-target">60s</span>
+                  </div>
+                  <div class="tele-col highlight">
+                    <span class="tele-title">PACE SPEED</span>
+                    <span class="tele-value" id="metric-rate">+0%</span>
+                  </div>
+                  <div class="tele-col">
+                    <span class="tele-title">SPEAKING SPEED</span>
+                    <span class="tele-value" id="metric-wpm">150 WPM</span>
+                  </div>
+                  <div class="tele-col retention">
+                    <span class="tele-title">RETENTION FIT</span>
+                    <span class="tele-value score" id="metric-score">98%</span>
+                  </div>
+                </div>
+
+                <div class="telemetry-bar">
+                  <div class="status-orb optimal" id="feedback-indicator"></div>
+                  <span class="telemetry-message" id="feedback-text">🔥 Perfect viral pacing! Locked to your 60s video cut.</span>
+                  <button class="btn-resync" id="btn-sync-pace">⚡ Sync Voice Pace</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Script Editor & Workflow Controls -->
+            <div class="workspace-editor-box">
+              <div class="editor-subbar">
+                <span class="subbar-tag">Script & Hook Templates:</span>
+                <div class="subbar-chips">
+                  <button class="sub-chip" data-prompt="faceless_hook">⚡ 3-Sec Viral Hook</button>
+                  <button class="sub-chip" data-prompt="mystery">🕵️ Mystery / Crime</button>
+                  <button class="sub-chip" data-prompt="wealth">💰 Money Secret</button>
+                  <button class="sub-chip" data-prompt="psychology">🧠 Dark Psychology</button>
+                  <button class="sub-chip" data-prompt="tech">🚀 Tech 2026</button>
+                  <button class="sub-chip" data-prompt="full_short">📱 60-Sec Full Short</button>
+                </div>
+              </div>
+
+              <!-- Main Textarea -->
+              <div class="textarea-glow-rim">
+                <textarea 
+                  id="script-input" 
+                  class="studio-textarea"
+                  placeholder="Paste your faceless video script here. The Time-Warp Auto-Pacer will automatically tune the voice pace to match your video target..."
+                  rows="7"
+                  spellcheck="false"
+                >Here is the dark truth about why 99% of people fail before they even start. In 1971, psychologists discovered a hidden cognitive loop that tricks your brain into mistaking motion for real progress. When you watch tutorials or write endless to-do lists, your dopamine spikes as if you actually accomplished the goal. But here is the fix: stop planning in secret. Take one single uncomfortable action before noon every day, and watch what happens to your life.</textarea>
+              </div>
+
+              <!-- Editor Footer Telemetry & Quick Action Buttons -->
+              <div class="editor-telemetry-row">
+                <div class="telemetry-chips">
+                  <span class="t-pill"><strong id="char-count">0</strong> chars</span>
+                  <span class="t-pill"><strong id="word-count">0</strong> words</span>
+                  <span class="t-pill">Natural: <strong id="est-time">0s</strong></span>
+                </div>
+
+                <div class="editor-buttons-cluster">
+                  <button class="action-btn" id="btn-insert-pause" title="Insert 0.5s pause for B-roll footage cuts">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <span>+Pause (0.5s)</span>
+                  </button>
+                  <button class="action-btn" id="btn-paste" title="Paste from clipboard">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+                    <span>Paste</span>
+                  </button>
+                  <button class="action-btn" id="btn-clear" title="Clear script">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                    <span>Clear</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Fine-Tuning Drawer (Collapsible Sliders) -->
+            <div class="tuning-drawer" id="settings-drawer">
+              <div class="tuning-header" id="drawer-toggle">
+                <div class="tuning-title">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                  <span>Acoustic Fine-Tuning</span>
+                  <span class="tuning-summary" id="settings-summary">Speed: 1.0x • Pitch: Normal • Vol: 100%</span>
+                </div>
+                <button class="btn-drawer-arrow">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+              </div>
+
+              <div class="tuning-body" id="drawer-body">
+                <div class="sliders-row">
+                  <div class="slider-box">
+                    <div class="slider-meta">
+                      <label>Speed / Multiplier</label>
+                      <span class="slider-badge" id="speed-val">1.0x (+0%)</span>
+                    </div>
+                    <input type="range" id="speed-slider" min="-50" max="100" value="0" step="1">
+                    <div class="slider-hints">
+                      <span>0.5x Slow</span>
+                      <button class="btn-param-reset" data-target="speed-slider" data-default="0">Reset</button>
+                      <span>2.0x Fast</span>
+                    </div>
+                  </div>
+
+                  <div class="slider-box">
+                    <div class="slider-meta">
+                      <label>Pitch Tone</label>
+                      <span class="slider-badge" id="pitch-val">+0 Hz (Normal)</span>
+                    </div>
+                    <input type="range" id="pitch-slider" min="-50" max="50" value="0" step="2">
+                    <div class="slider-hints">
+                      <span>Deeper (-50Hz)</span>
+                      <button class="btn-param-reset" data-target="pitch-slider" data-default="0">Reset</button>
+                      <span>Higher (+50Hz)</span>
+                    </div>
+                  </div>
+
+                  <div class="slider-box">
+                    <div class="slider-meta">
+                      <label>Loudness Boost</label>
+                      <span class="slider-badge" id="volume-val">100% (+0%)</span>
+                    </div>
+                    <input type="range" id="volume-slider" min="-50" max="50" value="0" step="5">
+                    <div class="slider-hints">
+                      <span>Softer (-50%)</span>
+                      <button class="btn-param-reset" data-target="volume-slider" data-default="0">Reset</button>
+                      <span>Louder (+50%)</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- One-click signature styles -->
+                <div class="signature-styles-bar">
+                  <span class="sig-label">Signature Channel Presets:</span>
+                  <div class="sig-buttons">
+                    <button class="sig-btn" data-voice="en-US-AndrewNeural" data-speed="15" data-pitch="5" data-vol="10">⚡ Viral TikTok Hook</button>
+                    <button class="sig-btn" data-voice="en-US-BrianNeural" data-speed="-6" data-pitch="-10" data-vol="12">🕵️ Mystery / Crime</button>
+                    <button class="sig-btn" data-voice="en-US-GuyNeural" data-speed="12" data-pitch="2" data-vol="8">💰 Cash Cow Top 10</button>
+                    <button class="sig-btn" data-voice="en-US-ChristopherNeural" data-speed="0" data-pitch="-8" data-vol="15">🎬 Cinematic Trailer</button>
+                    <button class="sig-btn" data-voice="en-US-AvaNeural" data-speed="8" data-pitch="4" data-vol="5">🌟 Storytime & Reddit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Primary Action Bar -->
+            <div class="master-action-bar">
+              <div class="shortcut-tip">
+                Press <kbd>Ctrl</kbd> + <kbd>Enter</kbd> to synthesize audio & synchronized subtitles
+              </div>
+
+              <button class="btn-master-generate" id="btn-generate">
+                <span class="btn-gen-content">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  <span class="btn-label">Synthesize Speech & SRT</span>
+                </span>
+                <span class="btn-gen-loading">
+                  <span class="neon-spinner"></span>
+                  <span>Rendering Neural Voice...</span>
+                </span>
+              </button>
+            </div>
+
+          </div>
+
+          <!-- Bottom Floating Audio Deck & Synchronized SRT Dock -->
+          <div class="master-player-deck" id="player-dock">
+            <div class="player-top-row">
+              <div class="player-voice-info">
+                <span class="player-voice-pill">
+                  <span id="dock-flag">🇺🇸</span>
+                  <strong id="dock-voice-name">Andrew Natural</strong>
+                </span>
+                <span class="player-telemetry" id="dock-gen-stat">⚡ Ready for video editing</span>
+              </div>
+
+              <div class="player-export-actions">
+                <button class="btn-export-srt" id="btn-download-srt" title="Download Synchronized Subtitles (.SRT) for CapCut / Premiere Pro">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  <span>Download .SRT (Captions)</span>
+                </button>
+                <button class="btn-export-audio" id="btn-download" title="Download Master MP3">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                  <span>Download MP3</span>
+                </button>
+                <button class="btn-export-copy" id="btn-copy-srt" title="Copy Captions to Clipboard">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                  <span>Copy Captions</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Dual Mirrored Neon Spectrum Waveform Visualizer -->
+            <div class="spectrum-visualizer-box">
+              <canvas id="waveform-canvas" height="74"></canvas>
+            </div>
+
+            <!-- Playback Timeline & Audio Scrubber -->
+            <div class="playback-controls-bar">
+              <button class="btn-deck-play" id="btn-play-pause" title="Play / Pause (Space)">
+                <svg id="play-icon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                <svg id="pause-icon" class="hidden" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+              </button>
+
+              <div class="deck-timeline">
+                <span class="timeline-time" id="time-current">0:00</span>
+                <div class="timeline-track" id="progress-track">
+                  <div class="timeline-progress" id="progress-fill"></div>
+                  <div class="timeline-scrubber" id="progress-thumb"></div>
+                </div>
+                <span class="timeline-time" id="time-total">0:00</span>
+              </div>
+
+              <!-- Speed Selector Dropdown -->
+              <div class="speed-selector-wrap">
+                <button class="btn-speed-pill" id="btn-playback-speed">1.0x</button>
+                <div class="speed-flyout hidden" id="speed-menu">
+                  <button data-speed="0.8">0.8x</button>
+                  <button data-speed="1.0" class="active">1.0x</button>
+                  <button data-speed="1.25">1.25x</button>
+                  <button data-speed="1.5">1.5x</button>
+                  <button data-speed="2.0">2.0x</button>
+                </div>
+              </div>
+
+              <!-- Volume Control Widget -->
+              <div class="deck-volume-widget">
+                <button class="btn-vol-icon" id="btn-mute" title="Mute / Unmute">
+                  <svg id="vol-high" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                  <svg id="vol-muted" class="hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+                </button>
+                <input type="range" id="player-volume" min="0" max="1" step="0.05" value="1">
+              </div>
+            </div>
+
+            <!-- Hidden native HTML audio engine -->
+            <audio id="audio-engine" preload="auto"></audio>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ================================================================
+           TAB 2: VOICE MATRIX (EXPLORE 322+ NEURAL VOICES)
+           ================================================================ -->
+      <section id="tab-voices" class="tab-view">
+        <div class="matrix-header">
+          <div class="matrix-heading-box">
+            <h2>Neural Voice Matrix</h2>
+            <p>Access all 322+ ultra-realistic natural neural voices across 70+ languages. 100% free with unlimited generations.</p>
+          </div>
+
+          <div class="matrix-search-box">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="voice-search" placeholder="Search voices by name, accent, gender, or personality...">
+          </div>
+        </div>
+
+        <div class="matrix-filters-row">
+          <button class="filter-pill active" data-filter="featured">⭐ Flagship Natural</button>
+          <button class="filter-pill" data-filter="all">All Voices (322)</button>
+          <button class="filter-pill" data-filter="en-us">🇺🇸 US English</button>
+          <button class="filter-pill" data-filter="en-gb">🇬🇧 British</button>
+          <button class="filter-pill" data-filter="male">Male</button>
+          <button class="filter-pill" data-filter="female">Female</button>
+          <button class="filter-pill" data-filter="multilingual">Global Languages</button>
+        </div>
+
+        <div class="matrix-grid" id="voices-grid">
+          <!-- Populated dynamically -->
+        </div>
+      </section>
+
+      <!-- ================================================================
+           TAB 3: VAULT (GENERATION HISTORY & SUBTITLES)
+           ================================================================ -->
+      <section id="tab-history" class="tab-view">
+        <div class="vault-header">
+          <div class="vault-heading-box">
+            <h2>Production Vault</h2>
+            <p>All your synthesized voice clips, timing metrics, and synchronized .SRT subtitle files.</p>
+          </div>
+          <button class="btn-clear-vault" id="btn-clear-history">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+            Clear Vault
+          </button>
+        </div>
+
+        <div class="vault-list" id="history-list">
+          <!-- Populated dynamically -->
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Voice Selection Flyout Modal -->
+    <div class="vox-modal-backdrop hidden" id="voice-modal">
+      <div class="vox-modal-sheet">
+        <div class="modal-sheet-header">
+          <div class="sheet-title-group">
+            <h3>Select Neural Voice</h3>
+            <span>Choose from 322 realistic neural voices</span>
+          </div>
+          <button class="btn-close-sheet" id="modal-close-btn">&times;</button>
+        </div>
+
+        <div class="sheet-search-wrap">
+          <input type="text" id="modal-voice-search" placeholder="Type to filter voices (e.g. Andrew, Ava, Brian, UK, Spanish)...">
+        </div>
+
+        <div class="sheet-filter-chips">
+          <button class="sheet-chip active" data-modelfilter="featured">Featured Realistic</button>
+          <button class="sheet-chip" data-modelfilter="male">Male</button>
+          <button class="sheet-chip" data-modelfilter="female">Female</button>
+          <button class="sheet-chip" data-modelfilter="all">All 322 Voices</button>
+        </div>
+
+        <div class="sheet-voices-scroll" id="modal-voices-list">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating Toast Notification System -->
+    <div class="vox-toast hidden" id="toast"></div>
+
+  </div>
+
+  <script src="/static/app.js?v=2.2"></script>
+</body>
+</html>
